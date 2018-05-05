@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ParsersSatelit.iml" filepath="$PROJECT_DIR$/ParsersSatelit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lyngsat-Parser.iml" filepath="$PROJECT_DIR$/Lyngsat-Parser.iml" />
     </modules>
   </component>
 </project>
