@@ -12,13 +12,13 @@ public class TVChannel {
         this.id = id;
     }
 
-    public int getFrequency() {
-        return frequency;
-    }
-
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
-    }
+//    public int getFrequency() {
+//        return frequency;
+//    }
+//
+//    public void setFrequency(int frequency) {
+//        this.frequency = frequency;
+//    }
 
     public String getName() {
         return name;
@@ -28,13 +28,13 @@ public class TVChannel {
         this.name = name;
     }
 
-    public String getEncryption() {
-        return encryption;
-    }
-
-    public void setEncryption(String encryption) {
-        this.encryption = encryption;
-    }
+//    public String getEncryption() {
+//        return encryption;
+//    }
+//
+//    public void setEncryption(String encryption) {
+//        this.encryption = encryption;
+//    }
 
     public String getUrl() {
         return url;
@@ -44,13 +44,13 @@ public class TVChannel {
         this.url = url;
     }
 
-    public String getLang() {
-        return lang;
-    }
-
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
+//    public String getLang() {
+//        return lang;
+//    }
+//
+//    public void setLang(String lang) {
+//        this.lang = lang;
+//    }
 
     public void setSatelites(List<Satelite> satelites) {
         this.satelites = satelites;
