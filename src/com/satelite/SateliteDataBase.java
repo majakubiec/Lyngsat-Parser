@@ -45,6 +45,11 @@ class SateliteDataBase {
         executeUpdate("DELETE FROM channels;");
     }
 
+    void clearTables(String name){
+        executeUpdate("DELETE FROM " + name + ";");
+    }
+
+
     void executeUpdate(String update){
         try {
             Statement stmt = conn.createStatement();
@@ -67,11 +72,21 @@ class SateliteDataBase {
     }
 
     void addChannel(String name, String url, String lang){
-        executeUpdate("INSERT INTO channels(name, freq, url, enc, lang) VALUES (" +
+        executeUpdate("INSERT INTO channels(name, url, lang) VALUES (" +
                 "" + name +
                 "" + url +
                 "" + lang +
                 ")");
+
+    }
+
+    void addChannel(TVChannel channel){
+        executeUpdate("INSERT INTO channels(name, url, lang) VALUES (" +
+                "" + channel.getName() +
+                "" + channel.getUrl() +
+                "" + channel.getLang() +
+                ")");
+
     }
 
     void addSatelite(String name, String freq, String url, String enc, String lang){

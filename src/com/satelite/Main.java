@@ -15,12 +15,13 @@ public class Main {
         // now you start db connection
         SateliteDataBase db = new SateliteDataBase();
 
+
 //        db.addChannel(channels); // to be implmented, and many more =D
 
 
 
 /***************************************************************/
         // shows list of channels saved in memory
-        parser.showMeWhatYouGot();
+//        parser.showMeWhatYouGot();
     }
 }

@@ -66,11 +66,11 @@ public class TVChannel {
     }
 
     private int id;
-    private int frequency;
+//    private int frequency;
     private String name;
-    private String encryption;
+//    private String encryption;
     private String url;
-    private String lang;
+//    private String lang;
     private List<Satelite> satelites = new ArrayList<>();
 
 }
