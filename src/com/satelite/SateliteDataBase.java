@@ -217,8 +217,8 @@ class SateliteDataBase {
 
         }
         // todo implement inserting whole list of sats at once (dont modify arguments)
-
     }
+
     void mapSatToCh(int sat_id, int cha_id){
         executeUpdate("INSERT INTO ch_sat_map(sat_id, ch_id) VALUES (" +
                 "" + String.valueOf(sat_id )+
@@ -226,11 +226,46 @@ class SateliteDataBase {
                 ");");
     }
 
-    void getInfoCh ( String name){
-        executeQuery("SELECT * from channels where name like \'" + name + "\';");
+    String getChannelDescription(String name){
+
+        String chinfo = "";
+
+        try {
+            /*requests data from db */
+            ResultSet rs = executeQuery("SELECT * from channels where name like \'" + name + "\';");
+
+            /* reads row by row and print data*/
+            while (rs.next()) {
+                chinfo = rs.getString("name") + " " + rs.getString("url");
+            }
+
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chinfo;
     }
-    void getInfoSat ( String name){
-        executeQuery("SELECT * from satelites where name like " + name + ";");
+
+    String getSateliteDescription(String name) {
+
+        String chinfo = "";
+
+        try {
+            /*requests data from db */
+            ResultSet rs = executeQuery("SELECT * from satelites where name like \'" + name + "\';");
+
+            /* reads row by row and print data*/
+            while (rs.next()) {
+                chinfo = rs.getString("name") + " " + rs.getString("link");
+            }
+
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chinfo;
     }
 
 }
