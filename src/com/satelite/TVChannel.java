@@ -56,12 +56,11 @@ public class TVChannel {
         this.satelites = satelites;
     }
 
-
     public List<Satelite> getSatelites() {
         return satelites;
     }
 
-    public void addSatelite(Satelite satelite){
+    public void addSatelite(Satelite satelite) {
         satelites.add(satelite);
     }
 

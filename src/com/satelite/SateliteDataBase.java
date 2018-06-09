@@ -1,6 +1,7 @@
 package com.satelite;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 class SateliteDataBase {
@@ -8,6 +9,7 @@ class SateliteDataBase {
     private Connection conn = null;
     int id_ch = 1;
     int id_sat=1;
+//    Statement stmt;
 
     SateliteDataBase(){
         /* mysql -u java -p java -h <IP> java */
@@ -16,6 +18,7 @@ class SateliteDataBase {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             conn = DriverManager.getConnection("jdbc:mysql://"+dbIpAddr+":3306/java", "java", "java");
+//            stmt = conn.createStatement();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,10 +169,32 @@ class SateliteDataBase {
     }
 */
     List<TVChannel> getAllChannels() {
-        // todo implement getting all channel entries (dont modify arguments)
-        // dont care how
-        // returns an ArrayList of TVChannel objects
-        return null;
+        List<TVChannel> chList = new ArrayList<>();
+
+        try {
+            /*requests data from db */
+            ResultSet rs = executeQuery("select * from channels;\n");
+
+            /* reads row by row and print data*/
+            while (rs.next()) {
+                TVChannel ch = new TVChannel();
+                ch.setId( rs.getInt("ch_id") );
+                ch.setUrl( rs.getString( "url" ) );
+//                ch.setPosition();
+                ch.setName( rs.getString( "name" ) );
+//                ch.setFreq();
+
+//                List<Satelite> sats = getSatsForChannelId( rs.getInt( "ch_id" ) );
+//                ch.setSatelites( sats );
+                chList.add(ch);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return chList;
     }
 
     void insertAllChannels(List<TVChannel> chls) {
@@ -179,6 +204,8 @@ class SateliteDataBase {
                     ch.getName(),
                     ch.getUrl(),
                     ch.getLang());
+            System.out.println(">> -- inserting channel " + ch.getName());
+
 
             for(Satelite sat: ch.getSatelites())
             {
@@ -189,15 +216,64 @@ class SateliteDataBase {
             id_ch++;
 
         }
-        // todo implement insetting channels list all at once (dont modify arguments)
     }
 
-    List<Satelite> getAllSateilites() {
-        // todo implement geting list of all satelite entries (dont modify arguments)
-        // dont care how
-        // returns an ArrayList of TVChannel objects
-        return null;
+    List<Satelite> getSatsForChannelId( int channelId ) {
+        List<Satelite> satList = new ArrayList<>();
+
+        try {
+            /*requests data from db */
+            ResultSet rs = executeQuery("select * from satelites natural join ch_sat_map where ch_id = " + channelId + " ;\n");
+
+            /* reads row by row and print data*/
+            while (rs.next()) {
+                Satelite sat = new Satelite();
+                sat.setId( rs.getInt("sat_id") );
+                sat.setLink( rs.getString( "link" ) );
+//                sat.setPosition();
+                sat.setName( rs.getString( "name" ) );
+//                sat.setFreq();
+
+                satList.add(sat);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return satList;
     }
+
+    List<Satelite> getSatsForChannelName( String channelName ) {
+        List<Satelite> satList = new ArrayList<>();
+
+        try {
+            /*requests data from db */
+            ResultSet rs = executeQuery("select * from satelites natural join ch_sat_map " +
+                    "inner join channels on channels.ch_id=ch_sat_map.ch_id " +
+                    "where channels.name= \'" + channelName + "\' ;\n");
+
+            /* reads row by row and print data*/
+            while (rs.next()) {
+                Satelite sat = new Satelite();
+                sat.setId( rs.getInt("sat_id") );
+                sat.setLink( rs.getString( "link" ) );
+//                sat.setPosition();
+                sat.setName( rs.getString( "name" ) );
+//                sat.setFreq();
+
+                satList.add(sat);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return satList;
+    }
+
 
     void insertAllSatelites(List<Satelite> sats) {
         for (Satelite sat : sats )
@@ -211,7 +287,6 @@ class SateliteDataBase {
             id_sat++;
 
         }
-        // todo implement inserting whole list of sats at once (dont modify arguments)
     }
 
     void mapSatToCh(int sat_id, int cha_id){

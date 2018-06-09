@@ -47,18 +47,8 @@ import java.util.List;
             DefaultMutableTreeNode chanNode = new DefaultMutableTreeNode(chn);
             channel.add(chanNode);
 
-            //create satelites nodes
-            List<Satelite> sat = tvc.getSatelites();
-
-            for (Satelite s : sat) {
-                String satelite = s.getName();
-                DefaultMutableTreeNode satNode = new DefaultMutableTreeNode(satelite);
-                chanNode.add(satNode);
-
-            }
-
-
         }
+
 
         JScrollPane treescroll = new JScrollPane(tree);
         display = new JEditorPane();
@@ -70,11 +60,10 @@ import java.util.List;
         splitter.setDividerLocation(160);
 
 
-
-//        add(splitter, BorderLayout.CENTER);
         setVisible(true);
         add(splitter);
         tree.addTreeSelectionListener(new SelectionListener());
+
     }
 
 
@@ -83,9 +72,26 @@ import java.util.List;
             DefaultMutableTreeNode selected_node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
             String selected_node_name = selected_node.toString();
 
+
+            int nodeLevel = selected_node.getPath().length;
+            if (3 == nodeLevel){
                 display.setText(db.getSateliteDescription(selected_node_name));
+
+            } else if (2 == nodeLevel) {
+
+                List<Satelite> sats = db.getSatsForChannelName(selected_node_name);
+
                 System.out.print(selected_node_name);
 
+                for (Satelite s : sats) {
+                    String satelite = s.getName();
+
+                    DefaultMutableTreeNode satNode = new DefaultMutableTreeNode(satelite);
+                    selected_node.add(satNode);
+                }
+
+                display.setText(db.getChannelDescription(selected_node_name));
+            }
         }
     }
 }
