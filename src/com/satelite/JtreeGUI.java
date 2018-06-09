@@ -5,6 +5,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.StyledDocument;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,9 @@ import java.util.List;
     JSplitPane splitter;
     JTree tree;
     JEditorPane display;
+    JTextField searchtext;
+    JButton searchbutton;
+    JPanel panel;
 
     DefaultMutableTreeNode channel = new DefaultMutableTreeNode("Channels");
     SateliteDataBase db = new SateliteDataBase();
@@ -51,13 +55,32 @@ import java.util.List;
         splitter.setRightComponent(displayscroll);
         splitter.setDividerLocation(160);
 
+        panel = new JPanel();
+
+        searchtext= new JTextField(20);
+        panel.add(searchtext);
+
+        JButton searchbutton = new JButton("Szukaj");
+        searchbutton.addActionListener(new ButtonListener());
+        panel.add(searchbutton);
+        getContentPane().add(panel, BorderLayout.SOUTH);
+
 
         setVisible(true);
         add(splitter);
         tree.addTreeSelectionListener(new SelectionListener());
 
     }
+     class ButtonListener implements ActionListener {
+         ButtonListener() {
+         }
 
+         public void actionPerformed(ActionEvent e) {
+             if (e.getActionCommand().equals("Button1")) {
+                 System.out.println("Button1 has been clicked");
+             }
+         }
+     }
 
     class SelectionListener implements TreeSelectionListener{
         public void valueChanged(TreeSelectionEvent se){
