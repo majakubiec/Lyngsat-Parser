@@ -36,6 +36,10 @@ import java.util.List;
 
         this.tvChannels = tvChannels;
 
+        channel = new DefaultMutableTreeNode("Channels");
+        tree_model = new DefaultTreeModel(channel);
+        tree = new JTree(tree_model);
+
         createTree("");
 
         JScrollPane treescroll = new JScrollPane(tree);
@@ -94,19 +98,13 @@ import java.util.List;
             tvCh = db.getChannelsLike(search);
         }
 
-        tree_model = new DefaultTreeModel(channel);
-        tree = new JTree(tree_model);
+        channel.removeAllChildren();
 
         //create channel nodes
-        for (TVChannel tvc : tvChannels) {
+        for (TVChannel tvc : tvCh) {
             String chn = tvc.getName();
             DefaultMutableTreeNode chanNode = new DefaultMutableTreeNode(chn);
             channel.add(chanNode);
         }
-     }
-
-//     List<TVChannel> findChannelsLike(String name){
-//
-//     }
-
- }
+    }
+}
