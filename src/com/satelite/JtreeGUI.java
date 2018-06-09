@@ -60,7 +60,7 @@ import java.util.List;
         searchtext= new JTextField(20);
         panel.add(searchtext);
 
-        JButton searchbutton = new JButton("Szukaj");
+        JButton searchbutton = new JButton("Search");
         searchbutton.addActionListener(new ButtonListener());
         panel.add(searchbutton);
         getContentPane().add(panel, BorderLayout.SOUTH);
@@ -76,8 +76,8 @@ import java.util.List;
          }
 
          public void actionPerformed(ActionEvent e) {
-             if (e.getActionCommand().equals("Button1")) {
-                 System.out.println("Button1 has been clicked");
+             if (e.getActionCommand().equals("Search")) {
+                 createTree(searchtext.getText());
              }
          }
      }
