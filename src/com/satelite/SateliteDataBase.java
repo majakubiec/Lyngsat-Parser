@@ -184,6 +184,7 @@ class SateliteDataBase {
                 ch.setName( rs.getString( "name" ) );
 //                ch.setFreq();
 
+
 //                List<Satelite> sats = getSatsForChannelId( rs.getInt( "ch_id" ) );
 //                ch.setSatelites( sats );
                 chList.add(ch);
@@ -274,6 +275,32 @@ class SateliteDataBase {
         return satList;
     }
 
+    List<TVChannel> getChannelsLike( String channelName ) {
+        List<TVChannel> chList = new ArrayList<>();
+
+        try {
+            /*requests data from db */
+            ResultSet rs = executeQuery("select * from channels where LOWER(name) rlike LOWER(\'" + channelName + "\') ;\n");
+
+            /* reads row by row and print data*/
+            while (rs.next()) {
+                TVChannel sat = new TVChannel();
+                sat.setId( rs.getInt("ch_id") );
+                sat.setUrl( rs.getString( "url" ) );
+//                sat.setPosition();
+                sat.setName( rs.getString( "name" ) );
+//                sat.setFreq();
+
+                chList.add(sat);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return chList;
+    }
 
     void insertAllSatelites(List<Satelite> sats) {
         for (Satelite sat : sats )

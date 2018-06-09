@@ -24,6 +24,7 @@ import java.util.List;
 
     DefaultMutableTreeNode channel = new DefaultMutableTreeNode("Channels");
     SateliteDataBase db = new SateliteDataBase();
+    List<TVChannel> tvChannels = new ArrayList<>();
 
     public JtreeGUI(List<TVChannel> tvChannels) {
 
@@ -33,22 +34,9 @@ import java.util.List;
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
 
+        this.tvChannels = tvChannels;
 
-
-        tree_model = new DefaultTreeModel(channel);
-        tree = new JTree(tree_model);
-
-
-
-        //create channel nodes
-        for (TVChannel tvc : tvChannels) {
-
-            String chn = tvc.getName();
-            DefaultMutableTreeNode chanNode = new DefaultMutableTreeNode(chn);
-            channel.add(chanNode);
-
-        }
-
+        createTree("");
 
         JScrollPane treescroll = new JScrollPane(tree);
         display = new JEditorPane();
@@ -81,7 +69,6 @@ import java.util.List;
 
                 List<Satelite> sats = db.getSatsForChannelName(selected_node_name);
 
-                System.out.print(selected_node_name);
 
                 for (Satelite s : sats) {
                     String satelite = s.getName();
@@ -94,8 +81,32 @@ import java.util.List;
             }
         }
     }
-}
 
 
+    void createTree(String search){
+        List<TVChannel> tvCh;
 
+        if (search.equals("")){
+            tvCh = tvChannels;
+            System.out.println(tvChannels.size());
 
+        } else {
+            tvCh = db.getChannelsLike(search);
+        }
+
+        tree_model = new DefaultTreeModel(channel);
+        tree = new JTree(tree_model);
+
+        //create channel nodes
+        for (TVChannel tvc : tvChannels) {
+            String chn = tvc.getName();
+            DefaultMutableTreeNode chanNode = new DefaultMutableTreeNode(chn);
+            channel.add(chanNode);
+        }
+     }
+
+//     List<TVChannel> findChannelsLike(String name){
+//
+//     }
+
+ }
