@@ -129,5 +129,6 @@ import java.util.List;
             DefaultMutableTreeNode chanNode = new DefaultMutableTreeNode(chn);
             channel.add(chanNode);
         }
+        tree.updateUI();
     }
 }
