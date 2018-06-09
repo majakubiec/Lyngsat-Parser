@@ -23,6 +23,7 @@ import java.util.List;
     JEditorPane display;
 
     DefaultMutableTreeNode channel = new DefaultMutableTreeNode("Channels");
+    SateliteDataBase db = new SateliteDataBase();
 
     public JtreeGUI(List<TVChannel> tvChannels) {
 
@@ -82,7 +83,7 @@ import java.util.List;
             DefaultMutableTreeNode selected_node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
             String selected_node_name = selected_node.toString();
 
-                display.setText(selected_node_name);
+                display.setText(db.getSateliteDescription(selected_node_name));
                 System.out.print(selected_node_name);
 
         }
