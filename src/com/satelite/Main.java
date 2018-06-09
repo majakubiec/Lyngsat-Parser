@@ -1,6 +1,9 @@
 package com.satelite;
 
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLDataException;
+
+import java.sql.ResultSet;
 import java.util.List;
 
 public class Main {
@@ -15,8 +18,15 @@ public class Main {
         // now you start db connection
         SateliteDataBase db = new SateliteDataBase();
 
-
-//        db.addChannel(channels); // to be implmented, and many more =D
+        db.clearTables();
+        db.clearTables1();
+        db.clearTables2();
+//    try {
+        db.insertAllChannels(channels); // to be implmented, and many more =D
+//    }catch (MySQLDataException ) {}
+        for (TVChannel ch: channels) {
+            db.getInfoCh(ch.getName());
+        }
 
 
 

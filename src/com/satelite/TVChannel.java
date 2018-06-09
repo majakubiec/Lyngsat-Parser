@@ -44,13 +44,13 @@ public class TVChannel {
         this.url = url;
     }
 
-//    public String getLang() {
-//        return lang;
-//    }
-//
-//    public void setLang(String lang) {
-//        this.lang = lang;
-//    }
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
 
     public void setSatelites(List<Satelite> satelites) {
         this.satelites = satelites;
@@ -70,7 +70,7 @@ public class TVChannel {
     private String name;
 //    private String encryption;
     private String url;
-//    private String lang;
+    private String lang;
     private List<Satelite> satelites = new ArrayList<>();
 
 }

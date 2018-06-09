@@ -10,7 +10,7 @@ public class unitTests {
 
         db.clearTables();
         for (TVChannel ch : parser.getTvChannels()){
-            db.addChannel(ch.getName(), ch.getUrl(), ch.getLang());
+       //     db.addChannel(ch.getName(), ch.getUrl(), ch.getLang());
         }
 //        ResultSet rs = db.getChannels();
 
