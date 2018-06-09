@@ -33,7 +33,6 @@ class SateliteDataBase {
             while (rs.next()) {
                 System.out.println(rs.getString("name") + " " + rs.getString("link"));
             }
-
             rs.close();
 
         } catch (SQLException e) {
@@ -45,11 +44,7 @@ class SateliteDataBase {
 
     void clearTables(){
         executeUpdate("DELETE FROM channels;");
-    }
-    void clearTables1(){
         executeUpdate("DELETE FROM satelites;");
-    }
-    void clearTables2(){
         executeUpdate("DELETE FROM ch_sat_map;");
     }
 

@@ -16,9 +16,7 @@ public class Main {
         SateliteDataBase db = new SateliteDataBase();
 
 //        db.clearTables();
-//        db.clearTables1();
-//        db.clearTables2();
-//
+
 //        db.insertAllChannels(channels);
 
         System.out.println("DEBUG INFO >> channels demo ");
