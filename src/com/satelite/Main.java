@@ -10,10 +10,11 @@ public class Main {
 
         // here you have list of a few parsed channels
         List<TVChannel> channels = parser.getTvChannels();
+        new JtreeGUI(channels);
 
 /*******THIS IS YOUR PLAYGROUND @MARICN*************************/
         // now you start db connection
-        SateliteDataBase db = new SateliteDataBase();
+        //SateliteDataBase db = new SateliteDataBase();
 
 
 //        db.addChannel(channels); // to be implmented, and many more =D
