@@ -9,7 +9,6 @@ class SateliteDataBase {
     private Connection conn = null;
     int id_ch = 1;
     int id_sat=1;
-//    Statement stmt;
 
     SateliteDataBase(){
         /* mysql -u java -p java -h <IP> java */
@@ -113,12 +112,6 @@ class SateliteDataBase {
                 "," + channel.getUrl() +
                 "," + channel.getUrl() +
                 ");");
-
-        // todo implement modifying entries (dont modify arguments)
-        // dont care how
-        // e.g. can first query data>compare> update ony these that differ
-        //  or  update all data (easier and maybe even faster, dunno)
-        // would be nice to first check if entry exists
     }
 
     void updateSatelite(Satelite satelite){
@@ -128,31 +121,18 @@ class SateliteDataBase {
 
     void deleteChannel(TVChannel channel){
         executeUpdate("DELETE FROM channels where ch_id =" +channel.getId() +";") ;
-
-        // todo implement deleting entries for channels
-        // (dont modify arguments)
-        // dont care how (same as with updateChannel() )
     }
 
     void deleteSatelite(Satelite satelite){
         executeUpdate("DELETE FROM satelites where sat_id =" +satelite.getId() +";") ;
-        // todo implement deleting entries for sats
     }
 
     int getChannelId(TVChannel channel){
         return channel.getId();
-        // todo implement geting channel id
-        // (dont modify arguments)
-        // dont care how (same as with updateChannel() )
-//        return -1;
     }
 
     int getSateliteId(Satelite satelite){
         return satelite.getId();
-        // todo implement geting sat id
-        // (dont modify arguments)
-        // dont care how (same as with updateChannel() )
-//        return -1;
     }
 
 /* COMMENTED BECAUSE DON'T NEED TO  BE IMPLEMENTED NOW

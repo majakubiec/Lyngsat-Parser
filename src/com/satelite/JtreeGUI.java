@@ -1,4 +1,5 @@
 package com.satelite;
+
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
@@ -14,8 +15,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
- class JtreeGUI extends JFrame {
-
+class JtreeGUI extends JFrame {
 
 
     DefaultTreeModel tree_model;
@@ -33,7 +33,7 @@ import java.util.List;
     public JtreeGUI(List<TVChannel> tvChannels) {
 
         super("Lyngsat-Parser");
-        setSize(500,300);
+        setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
@@ -53,11 +53,11 @@ import java.util.List;
         splitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         splitter.setLeftComponent(treescroll);
         splitter.setRightComponent(displayscroll);
-        splitter.setDividerLocation(160);
+        splitter.setDividerLocation(300);
 
         panel = new JPanel();
 
-        searchtext= new JTextField(20);
+        searchtext = new JTextField(50);
         panel.add(searchtext);
 
         JButton searchbutton = new JButton("Search");
@@ -71,25 +71,26 @@ import java.util.List;
         tree.addTreeSelectionListener(new SelectionListener());
 
     }
-     class ButtonListener implements ActionListener {
-         ButtonListener() {
-         }
 
-         public void actionPerformed(ActionEvent e) {
-             if (e.getActionCommand().equals("Search")) {
-                 createTree(searchtext.getText());
-             }
-         }
-     }
+    class ButtonListener implements ActionListener {
+        ButtonListener() {
+        }
 
-    class SelectionListener implements TreeSelectionListener{
-        public void valueChanged(TreeSelectionEvent se){
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equals("Search")) {
+                createTree(searchtext.getText());
+            }
+        }
+    }
+
+    class SelectionListener implements TreeSelectionListener {
+        public void valueChanged(TreeSelectionEvent se) {
             DefaultMutableTreeNode selected_node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
             String selected_node_name = selected_node.toString();
 
 
             int nodeLevel = selected_node.getPath().length;
-            if (3 == nodeLevel){
+            if (3 == nodeLevel) {
                 display.setText(db.getSateliteDescription(selected_node_name));
 
             } else if (2 == nodeLevel) {
@@ -110,10 +111,10 @@ import java.util.List;
     }
 
 
-    void createTree(String search){
+    void createTree(String search) {
         List<TVChannel> tvCh;
 
-        if (search.equals("")){
+        if (search.equals("")) {
             tvCh = tvChannels;
             System.out.println(tvChannels.size());
 
@@ -130,5 +131,6 @@ import java.util.List;
             channel.add(chanNode);
         }
         tree.updateUI();
+        tree.expandPath(new TreePath(channel.getPath()));
     }
 }
