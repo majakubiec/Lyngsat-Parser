@@ -11,6 +11,7 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ class JtreeGUI extends JFrame {
     DefaultMutableTreeNode channel = new DefaultMutableTreeNode("Channels");
     SateliteDataBase db = new SateliteDataBase();
     List<TVChannel> tvChannels = new ArrayList<>();
+    JFrame warningWindow = new JFrame("WARNING");
 
     public JtreeGUI(List<TVChannel> tvChannels) {
 
@@ -63,7 +65,10 @@ class JtreeGUI extends JFrame {
         JButton searchbutton = new JButton("Search");
         searchbutton.addActionListener(new ButtonListener());
         panel.add(searchbutton);
-        getContentPane().add(panel, BorderLayout.SOUTH);
+        JButton dbUpdateButton = new JButton("Update");
+        dbUpdateButton.addActionListener(new ButtonListener());
+        panel.add(dbUpdateButton);
+        getContentPane().add(panel, BorderLayout.NORTH);
 
 
         setVisible(true);
@@ -75,11 +80,28 @@ class JtreeGUI extends JFrame {
     class ButtonListener implements ActionListener {
         ButtonListener() {
         }
-
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Search")) {
                 createTree(searchtext.getText());
             }
+            else if (e.getActionCommand().equals("Update")){
+
+                int opcion = JOptionPane.showConfirmDialog(null,
+                        "Are you sure you want to update whole data base?" +
+                                " It can take up to 10 minutes",
+                        "Warning",JOptionPane.YES_NO_OPTION);
+
+                if (opcion==0){
+                    SateliteParser satPar = new SateliteParser();
+                    satPar.runParser();
+                    List<TVChannel> chls = satPar.getTvChannels();
+                    System.out.println("Parsinng Done >> inserting into database");
+//                    db.insertAllChannels(chls);
+                    System.out.println("Done");
+                }
+
+            }
+
         }
     }
 

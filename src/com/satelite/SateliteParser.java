@@ -20,18 +20,21 @@ class SateliteParser {
     public int siteCounter = 0;
 
     SateliteParser(){
+
+    }
+
+    void runParser(){
         System.out.println("Starting Parser");
-        HashSet<String> sateliteUrlSet = getSateliteUrls();
+//        HashSet<String> sateliteUrlSet = getSateliteUrls();
 
         /* for testing purpouses -- to bo later removed and dont forget to uncomment ^^look up^^ */
-//        HashSet<String> sateliteUrlSet = new HashSet<>();
-//        sateliteUrlSet.add("https://www.lyngsat.com/Eutelsat-Hot-Bird-13E.html");
+        HashSet<String> sateliteUrlSet = new HashSet<>();
+        sateliteUrlSet.add("https://www.lyngsat.com/Eutelsat-Hot-Bird-13E.html");
 
         System.out.println("Having " + sateliteUrlSet.size() + " sats to parse, lets do it ;)\n");
         for (String satUrl : sateliteUrlSet){
             parseUrl(satUrl);
         }
-
     }
 
     private HashSet<String> getSateliteUrls(){
