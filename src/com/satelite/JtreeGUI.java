@@ -24,7 +24,6 @@ class JtreeGUI extends JFrame {
     JTree tree;
     JEditorPane display;
     JTextField searchtext;
-    JButton searchbutton;
     JPanel panel;
 
     DefaultMutableTreeNode channel = new DefaultMutableTreeNode("Channels");
@@ -51,6 +50,7 @@ class JtreeGUI extends JFrame {
         JScrollPane treescroll = new JScrollPane(tree);
         display = new JEditorPane();
         display.setEditable(false);
+        display.setFont(new Font("Segoe UI",0,20));
         JScrollPane displayscroll = new JScrollPane(display);
         splitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         splitter.setLeftComponent(treescroll);
@@ -60,6 +60,7 @@ class JtreeGUI extends JFrame {
         panel = new JPanel();
 
         searchtext = new JTextField(50);
+        searchtext.setFont(new Font("Segoe UI",0,16));
         panel.add(searchtext);
 
         JButton searchbutton = new JButton("Search");
@@ -80,24 +81,26 @@ class JtreeGUI extends JFrame {
     class ButtonListener implements ActionListener {
         ButtonListener() {
         }
+
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Search")) {
                 createTree(searchtext.getText());
-            }
-            else if (e.getActionCommand().equals("Update")){
+            } else if (e.getActionCommand().equals("Update")) {
 
-                int opcion = JOptionPane.showConfirmDialog(null,
+                int option = JOptionPane.showConfirmDialog(null,
                         "Are you sure you want to update whole data base?" +
                                 " It can take up to 10 minutes",
-                        "Warning",JOptionPane.YES_NO_OPTION);
+                        "Warning", JOptionPane.YES_NO_OPTION);
 
-                if (opcion==0){
+                if (option == 0) {
                     SateliteParser satPar = new SateliteParser();
                     satPar.runParser();
                     List<TVChannel> chls = satPar.getTvChannels();
                     System.out.println("Parsinng Done >> inserting into database");
-//                    db.insertAllChannels(chls);
-                    System.out.println("Done");
+//                    todo db.insertAllChannels(chls);
+                    int confirm = JOptionPane.showConfirmDialog(null,
+                            "Update Done",
+                            "Update Done", JOptionPane.YES_OPTION);
                 }
 
             }
