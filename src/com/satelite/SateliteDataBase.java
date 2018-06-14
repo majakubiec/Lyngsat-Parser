@@ -313,10 +313,10 @@ class SateliteDataBase {
 
             /* reads row by row and print data*/
             while (rs.next()) {
-                chinfo = "Nazwa kanalu:   "+ rs.getString("name") +
-                        "\nID kanalu:          " + rs.getString("ch_id") +
-//                        "\nJezyk: "+ rs.getString("lang") +
-                        "\n\n\n jego link: " + rs.getString("url");
+                chinfo = "Channel's name:   "+ rs.getString("name") +
+                        "\nChannel's ID:        " + rs.getString("ch_id") +
+//                        "\nLanguage: "+ rs.getString("lang") +
+                        "\n\n\n URL link: " + rs.getString("url");
             }
 
             rs.close();
@@ -337,11 +337,11 @@ class SateliteDataBase {
 
             /* reads row by row and print data*/
             while (rs.next()) {
-                chinfo = "Nazwa satelity:  "+ rs.getString("name") +
-                        "\nID satelity:         " + rs.getString("sat_id") +
-                        "\nCzestotliwosc:   "+ rs.getString("freq") +
-                        "\nJezyk:                 " + rs.getString("lang")+
-                        "\n\n\n jego link:       " + rs.getString("link");
+                chinfo = "Satelite's name:  "+ rs.getString("name") +
+                        "\nSatelite's ID:       " + rs.getString("sat_id") +
+                        "\nFrequency:          "+ rs.getString("freq") +
+                        "\nlanguage:            " + rs.getString("lang")+
+                        "\n\n\n URL link:       " + rs.getString("link");
 
             }
 
